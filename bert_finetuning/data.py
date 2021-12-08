@@ -23,7 +23,6 @@ class GermanData:
         self.train_df = pd.read_csv(data_path["train"], sep=separator)
         self.dev_df = pd.read_csv(data_path["dev"], sep=separator)
         self.test_df = pd.read_csv(data_path["test"], sep=separator)
-        self.columns_map = data_path["columns_map"]
         ## set max sequence length for model
         self.max_sequence_length = max_sequence_length
         ## get bert tokenizer
@@ -35,12 +34,12 @@ class GermanData:
         """
         Separate out labels and texts
         """
-        train_texts = self.train_df[self.columns_map["text"]].values
-        train_labels = self.train_df[self.columns_map["label"]].values
-        val_texts = self.dev_df[self.columns_map["text"]].values
-        val_labels = self.dev_df[self.columns_map["label"]].values
-        test_texts = self.test_df[self.columns_map["text"]].values
-        test_labels = self.test_df[self.columns_map["label"]].values
+        train_texts = self.train_df["text"].values
+        train_labels = self.train_df["label"].values
+        val_texts = self.dev_df["text"].values
+        val_labels = self.dev_df["label"].values
+        test_texts = self.test_df["text"].values
+        test_labels = self.test_df["label"].values
 
         return train_texts, val_texts, test_texts, train_labels, val_labels, test_labels
 
@@ -180,9 +179,18 @@ class GermanData:
 
 
 if __name__ == "__main__":
-    data_path = {
-        "train": "train_buy_sell_intent_dataset.csv",
-        "dev": "val_buy_sell_intent_dataset.csv",
-        "test": "test_buy_sell_intent_dataset.csv",
+    germeval_data_paths = {
+        "train": "./datasets/hasoc_dataset/hasoc_german_train.csv",
+        "dev": "./datasets/hasoc_dataset/hasoc_german_validation.csv",
+        "test": "./datasets/hasoc_dataset/hasoc_german_test.csv",
     }
-    GermanData(data_path).text_to_tensors()
+
+    hasoc_german_data_paths = {
+        "train": "./datasets/hasoc_dataset/hasoc_german_train.csv",
+        "dev": "./datasets/hasoc_dataset/hasoc_german_validation.csv",
+        "test": "./datasets/hasoc_dataset/hasoc_german_test.csv",
+    }
+
+    GermanData(
+        hasoc_german_data_paths,
+    ).text_to_tensors()
