@@ -1,21 +1,22 @@
 import torch
+from data_loader import GermanDataLoader
 from model import BERTClassifier
 from config import BertOptimConfig
 from train import train_model
 from eval import eval_model
-from data_loader import QuestionsDataLoader
 
 
 if __name__ == "__main__":
-    epochs = 5
+    epochs = 1
     num_labels = 2
     device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
+
     data_path = {
-        "train": "train_buy_sell_intent_dataset.csv",
-        "dev": "val_buy_sell_intent_dataset.csv",
-        "test": "test_buy_sell_intent_dataset.csv",
+        "train": "./datasets/hasoc_dataset/hasoc_german_train.csv",
+        "dev": "./datasets/hasoc_dataset/hasoc_german_validation.csv",
+        "test": "./datasets/hasoc_dataset/hasoc_german_test.csv",
     }
-    data_loaders = QuestionsDataLoader(data_path, batch_size=8)
+    data_loaders = GermanDataLoader(data_path, batch_size=8)
     model = BERTClassifier(num_labels=num_labels).get_model()
     optim_config = BertOptimConfig(
         model=model, train_dataloader=data_loaders.train_dataloader, epochs=epochs
