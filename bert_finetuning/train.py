@@ -1,5 +1,6 @@
 from utils import flat_accuracy
 from tqdm import tqdm, trange
+from transformers import BertTokenizer, BertConfig
 import torch
 
 
@@ -8,9 +9,11 @@ def train_model(
 ):
     t = []
 
+    tokenizer = BertTokenizer.from_pretrained("deepset/gbert-base", do_lower_case=True)
+
     # Store our loss and accuracy for plotting
     train_loss_set = []
-
+    best_validation_score = -1
     # trange is a tqdm wrapper around the normal python range
     for _ in trange(epochs, desc="Epoch"):
 
@@ -81,7 +84,12 @@ def train_model(
 
             eval_accuracy += tmp_eval_accuracy
             nb_eval_steps += 1
-        model.save_pretrained("./model")
-        print("Validation Accuracy: {}".format(eval_accuracy / nb_eval_steps))
+        val_acc = eval_accuracy / nb_eval_steps
+        print("Validation Accuracy: {}".format(val_acc))
+        if val_acc > best_validation_score:
+            best_validation_score = val_acc
+            print("Saving best model so far...")
+            tokenizer.save_pretrained("./model")
+            model.save_pretrained("./model")
 
     return model
