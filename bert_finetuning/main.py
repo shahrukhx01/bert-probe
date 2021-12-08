@@ -32,6 +32,7 @@ if __name__ == "__main__":
         validation_dataloader=data_loaders.validation_dataloader,
         epochs=epochs,
         device=device,
+        model_name=model_name,
     )
 
     ## test model performance on unseen test set
