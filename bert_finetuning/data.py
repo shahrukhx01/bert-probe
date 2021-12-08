@@ -16,10 +16,18 @@ logger = logging.getLogger()
 
 
 class GermanData:
-    def __init__(self, data_path, model_name, separator=",", max_sequence_length=512):
+    def __init__(
+        self,
+        data_path,
+        model_name,
+        separator=",",
+        max_sequence_length=512,
+        do_cleansing=True,
+    ):
         """
         Load dataset and bert tokenizer
         """
+        self.do_cleansing = do_cleansing
         self.clean_chars = re.compile(r"[^A-Za-züöäÖÜÄß ]", re.MULTILINE)
         self.clean_http_urls = re.compile(r"https*\\S+", re.MULTILINE)
         self.clean_at_mentions = re.compile(r"@\\S+", re.MULTILINE)
@@ -75,8 +83,9 @@ class GermanData:
         """
         Clean sequences and add bert token (CLS and SEP) tokens to each sequence pre-tokenization
         """
-        ## perform cleansing on text
-        texts = [self.clean_text(text) for text in texts]
+        if self.do_cleansing:
+            ## perform cleansing on text
+            texts = [self.clean_text(text) for text in texts]
         ## separate labels and texts before preprocessing
         # Adding CLS and SEP tokens at the beginning and end of each sequence for BERT
         texts_processed = ["[CLS] " + str(sequence) + " [SEP]" for sequence in texts]
