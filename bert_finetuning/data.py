@@ -178,6 +178,9 @@ class GermanData:
         self.test_masks = torch.tensor(test_masks)
 
 
+"""
+** FOR DEBUGGING **
+
 if __name__ == "__main__":
     germeval_data_paths = {
         "train": "./datasets/hasoc_dataset/hasoc_german_train.csv",
@@ -194,3 +197,4 @@ if __name__ == "__main__":
     GermanData(
         hasoc_german_data_paths,
     ).text_to_tensors()
+"""
