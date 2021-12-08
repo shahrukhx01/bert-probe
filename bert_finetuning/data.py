@@ -6,6 +6,7 @@ from sklearn.model_selection import train_test_split
 from transformers import BertTokenizer, BertConfig
 from tqdm import tqdm
 import logging
+import re
 
 ## setting the threshold of logger to INFO
 logging.basicConfig(filename="data_loader.log", level=logging.INFO)
@@ -19,6 +20,9 @@ class GermanData:
         """
         Load dataset and bert tokenizer
         """
+        self.clean_chars = re.compile(r"[^A-Za-züöäÖÜÄß ]", re.MULTILINE)
+        self.clean_http_urls = re.compile(r"https*\\S+", re.MULTILINE)
+        self.clean_at_mentions = re.compile(r"@\\S+", re.MULTILINE)
         ## load data into memory
         self.train_df = pd.read_csv(data_path["train"], sep=separator)
         self.dev_df = pd.read_csv(data_path["dev"], sep=separator)
@@ -41,10 +45,38 @@ class GermanData:
 
         return train_texts, val_texts, test_texts, train_labels, val_labels, test_labels
 
+    def replace_numbers(self, text: str) -> str:
+        return (
+            text.replace("0", " null")
+            .replace("1", " eins")
+            .replace("2", " zwei")
+            .replace("3", " drei")
+            .replace("4", " vier")
+            .replace("5", " fünf")
+            .replace("6", " sechs")
+            .replace("7", " sieben")
+            .replace("8", " acht")
+            .replace("9", " neun")
+        )
+
+    def clean_text(self, text: str) -> str:
+        text = text.replace("\n", " ")
+        text = self.clean_http_urls.sub("", text)
+        text = self.clean_at_mentions.sub("", text)
+        text = self.replace_numbers(text)
+        text = self.clean_chars.sub("", text)  # use only text chars
+        text = " ".join(
+            text.split()
+        )  # substitute multiple whitespace with single whitespace
+        text = text.strip().lower()
+        return text
+
     def preprocess(self, texts):
         """
-        Add bert token (CLS and SEP) tokens to each sequence pre-tokenization
+        Clean sequences and add bert token (CLS and SEP) tokens to each sequence pre-tokenization
         """
+        ## perform cleansing on text
+        texts = [self.clean_text(text) for text in texts]
         ## separate labels and texts before preprocessing
         # Adding CLS and SEP tokens at the beginning and end of each sequence for BERT
         texts_processed = ["[CLS] " + str(sequence) + " [SEP]" for sequence in texts]
