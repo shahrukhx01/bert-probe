@@ -3,8 +3,15 @@ from data import GermanData
 
 
 class GermanDataLoader:
-    def __init__(self, data_paths, model_name, batch_size=8):
-        self.german_data = GermanData(data_paths, model_name)
+    def __init__(
+        self, data_paths, model_name, do_cleansing, max_sequence_length, batch_size=8
+    ):
+        self.german_data = GermanData(
+            data_paths,
+            model_name,
+            max_sequence_length=max_sequence_length,
+            do_cleansing=do_cleansing,
+        )
         self.batch_size = batch_size
         self.create_loaders()
 
