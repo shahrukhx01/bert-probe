@@ -3,6 +3,7 @@ from utils import flat_accuracy
 
 
 def eval_model(model, test_dataloader, device):
+    model = model.to(device)
     ## tracking variables
     eval_loss, eval_accuracy = 0, 0
     nb_eval_steps, nb_eval_examples = 0, 0
