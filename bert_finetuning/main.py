@@ -16,7 +16,7 @@ if __name__ == "__main__":
         "dev": "./datasets/hasoc_dataset/hasoc_german_validation.csv",
         "test": "./datasets/hasoc_dataset/hasoc_german_test.csv",
     }
-    data_loaders = GermanDataLoader(data_path, batch_size=32)
+    data_loaders = GermanDataLoader(data_path, batch_size=8)
     model = BERTClassifier(num_labels=num_labels).get_model()
     optim_config = BertOptimConfig(
         model=model, train_dataloader=data_loaders.train_dataloader, epochs=epochs
