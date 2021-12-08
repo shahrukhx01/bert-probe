@@ -12,7 +12,7 @@ def train_model(
     validation_dataloader,
     epochs,
     device,
-    model_name="deepset/gbert-base",
+    model_name,
 ):
     t = []
 
