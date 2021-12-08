@@ -36,7 +36,7 @@ class BertOptimConfig:
 
         self.optimizer = AdamW(
             optimizer_grouped_parameters,
-            lr=1e-4,  # args.learning_rate - default is 5e-5, from german bert 1e-4
+            lr=2e-5,  # args.learning_rate - default is 5e-5, our notebook had 2e-5
             eps=1e-8,  # args.adam_epsilon  - default is 1e-8.
         )
         # Total number of training steps is number of batches * number of epochs.
