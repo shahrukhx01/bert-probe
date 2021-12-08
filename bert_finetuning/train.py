@@ -92,4 +92,4 @@ def train_model(
             tokenizer.save_pretrained("./model")
             model.save_pretrained("./model")
 
-    return model.from_pretrained("./model")
+    return model.from_pretrained("./model").to(device)
