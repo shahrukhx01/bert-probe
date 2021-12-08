@@ -15,7 +15,7 @@ logger = logging.getLogger()
 
 
 class GermanData:
-    def __init__(self, data_path, separator=",", max_sequence_length=512):
+    def __init__(self, data_path, model_name, separator=",", max_sequence_length=512):
         """
         Load dataset and bert tokenizer
         """
@@ -26,9 +26,7 @@ class GermanData:
         ## set max sequence length for model
         self.max_sequence_length = max_sequence_length
         ## get bert tokenizer
-        self.tokenizer = BertTokenizer.from_pretrained(
-            "deepset/gbert-base", do_lower_case=True
-        )
+        self.tokenizer = BertTokenizer.from_pretrained(model_name, do_lower_case=True)
 
     def train_val_test_split(self):
         """

@@ -5,11 +5,18 @@ import torch
 
 
 def train_model(
-    model, optimizer, scheduler, train_dataloader, validation_dataloader, epochs, device
+    model,
+    optimizer,
+    scheduler,
+    train_dataloader,
+    validation_dataloader,
+    epochs,
+    device,
+    model_name="deepset/gbert-base",
 ):
     t = []
 
-    tokenizer = BertTokenizer.from_pretrained("deepset/gbert-base", do_lower_case=True)
+    tokenizer = BertTokenizer.from_pretrained(model_name, do_lower_case=True)
 
     # Store our loss and accuracy for plotting
     train_loss_set = []
