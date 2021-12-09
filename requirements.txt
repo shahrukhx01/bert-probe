@@ -1,7 +1,8 @@
-torch
-transformers
-tqdm
-sklearn
-numpy
-pandas
-keras
+torch==1.7.1
+transformers==4.9.2
+tqdm==4.60.0
+sklearn==0.0
+numpy==1.20.3
+pandas==1.2.4
+keras==2.4.3
+textattack==0.3.4
