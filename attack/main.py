@@ -1,4 +1,5 @@
 from executor.execute import ExecuteAttack
+from model.model import GermanHateSpeechModelWrapper
 
 
 def main():
