@@ -1,7 +1,7 @@
 from executor.execute import ExecuteAttack
 from model.model import GermanHateSpeechModelWrapper
 from dataset.dataset import GermanDataset
-from crafter.blackbox_word_level import BlackboxWordLevelAttack
+from crafter import BlackboxWordLevelAttack, BlackboxCharacterLevel
 
 
 def main():
@@ -18,9 +18,12 @@ def main():
     )
     ## define and build attacks
     blackbox_wordlevel_attack = BlackboxWordLevelAttack.build(hasoc_model_wrapper)
+    blackbox_charlevel_attack = BlackboxCharacterLevel.build(hasoc_model_wrapper)
     ## define executor and execute the attack
     executor = ExecuteAttack()
-    executor.execute(hasoc_dataset, attacks=[blackbox_wordlevel_attack])
+    executor.execute(
+        hasoc_dataset, attacks=[blackbox_wordlevel_attack, blackbox_charlevel_attack]
+    )
 
 
 if __name__ == "__main__":

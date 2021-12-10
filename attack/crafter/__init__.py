@@ -1,0 +1,2 @@
+from .blackbox_character_level import BlackboxCharacterLevel
+from .blackbox_word_level import BlackboxWordLevelAttack
