@@ -106,7 +106,7 @@ class WhiteboxWordLevelAttack(AttackRecipe):
             metric="cosine",
             compare_against_original=True,
             window_size=15,
-            skip_text_shorter_than_window=True,
+            skip_text_shorter_than_window=False,
         )
         constraints.append(use_constraint)
         #

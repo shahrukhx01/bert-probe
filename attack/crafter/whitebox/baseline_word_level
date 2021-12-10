@@ -16,10 +16,10 @@ from textattack.transformations import WordSwapMaskedLM
 from textattack.attack_recipes.attack_recipe import AttackRecipe
 
 
-class BlackboxWordLevelAttack(AttackRecipe):
+class BaselineWhiteboxWordLevelAttack(AttackRecipe):
     """
-    The blackbox word level attack is based on the following study:
-    BAE: BERT-based Adversarial Examples for Text Classification.
+    The blackbox word level attack is an extension on the following study:
+    BAE: BERT-based Adversarial Examples for Text Classification and
 
     https://arxiv.org/pdf/2004.01970
 
@@ -38,7 +38,7 @@ class BlackboxWordLevelAttack(AttackRecipe):
     """
 
     @staticmethod
-    def build(model_wrapper):
+    def build(model_wrapper, model_name):
         # "In this paper, we present a simple yet novel technique: BAE (BERT-based
         # Adversarial Examples), which uses a language model (LM) for token
         # replacement to best fit the overall context. We perturb an input sentence
@@ -61,16 +61,6 @@ class BlackboxWordLevelAttack(AttackRecipe):
         # Don't modify the same word twice or stopwords.
         #
         constraints = [RepeatModification(), StopwordModification()]
-
-        # For the R operations we add an additional check for
-        # grammatical correctness of the generated adversarial example by filtering
-        # out predicted tokens that do not form the same part of speech (POS) as the
-        # original token t_i in the sentence.
-        constraints.append(
-            PartOfSpeech(
-                tagger_type="stanza", allow_verb_noun_swap=True, language_stanza="de"
-            )
-        )
 
         # "To ensure semantic similarity on introducing perturbations in the input
         # text, we filter the set of top-K masked tokens (K is a pre-defined
@@ -125,8 +115,8 @@ class BlackboxWordLevelAttack(AttackRecipe):
         # • "If no token causes misclassification, we choose the perturbation that
         # decreases the prediction probability P(C(Sadv)=y) the most."
         #
-        search_method = GreedyWordSwapWIR(wir_method="delete")
+        search_method = GreedyWordSwapWIR(wir_method="attention", model_name=model_name)
 
-        return BlackboxWordLevelAttack(
+        return BaselineWhiteboxWordLevelAttack(
             goal_function, constraints, transformation, search_method
         )
