@@ -1,11 +1,22 @@
 from tqdm import tqdm
+from textattack.loggers import CSVLogger
 
 
 class ExecuteAttack:
     @staticmethod
     def execute(dataset, attacks):
+
         print(f"length of attack dataset: {len(dataset)}")
-        for text, label in tqdm(dataset):
-            for attack in attacks:
+        for attack_name, attack in tqdm(attacks):
+            logger = CSVLogger(
+                color_method="html",
+                filename=f"./attack_logs/results-{attack_name}.csv",
+            )
+            for text, label in dataset:
                 result = attack.attack(text, label)
-                print(result)
+                logger.log_attack_result(result)
+                print(result.__str__(color_method="ansi"))
+            # write the results and attack summary to csv
+            logger.flush()
+            summary = logger.df["result_type"].value_counts()
+            summary.to_csv(f"./attack_logs/summary-{attack_name}.csv")

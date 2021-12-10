@@ -35,12 +35,12 @@ def main():
     )
 
     attacks = [
-        whitebox_charlevel_attack
+        ("hasoc_whitebox_charlevel_attack", whitebox_charlevel_attack)
     ]  # , blackbox_wordlevel_attack, blackbox_charlevel_attack]
 
     ## execute the attack
     for attack in attacks:
-        ExecuteAttack.execute(hasoc_dataset, attacks=[attack])
+        ExecuteAttack.execute(hasoc_dataset, attacks=attacks)
 
 
 if __name__ == "__main__":
