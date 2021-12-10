@@ -1,2 +1,2 @@
-from blackbox.character_level import BlackboxCharacterLevel
-from blackbox.word_level import BlackboxWordLevelAttack
+from crafter.blackbox.character_level import BlackboxCharacterLevel
+from crafter.blackbox.word_level import BlackboxWordLevelAttack

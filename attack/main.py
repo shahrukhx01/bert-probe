@@ -19,7 +19,7 @@ def main():
     ## define and build attacks
     blackbox_wordlevel_attack = BlackboxWordLevelAttack.build(hasoc_model_wrapper)
     blackbox_charlevel_attack = BlackboxCharacterLevel.build(hasoc_model_wrapper)
-    attacks = [blackbox_charlevel_attack, blackbox_wordlevel_attack]
+    attacks = [blackbox_wordlevel_attack, blackbox_charlevel_attack]
     ## execute the attack
     for attack in attacks:
         ExecuteAttack.execute(hasoc_dataset, attacks=[attack])
