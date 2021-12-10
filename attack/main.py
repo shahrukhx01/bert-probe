@@ -6,6 +6,7 @@ from crafter import (
     BlackboxCharacterLevel,
     WhiteboxWordLevelAttack,
     WhiteboxCharacterLevel,
+    BaselineWhiteboxWordLevelAttack,
 )
 
 

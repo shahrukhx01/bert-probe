@@ -2,3 +2,4 @@ from crafter.blackbox.character_level import BlackboxCharacterLevel
 from crafter.blackbox.word_level import BlackboxWordLevelAttack
 from crafter.whitebox.word_level import WhiteboxWordLevelAttack
 from crafter.whitebox.character_level import WhiteboxCharacterLevel
+from crafter.whitebox.baseline_word_level import BaselineWhiteboxWordLevelAttack
