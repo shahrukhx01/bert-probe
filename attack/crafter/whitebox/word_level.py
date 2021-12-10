@@ -16,7 +16,7 @@ from textattack.transformations import WordSwapMaskedLM
 from textattack.attack_recipes.attack_recipe import AttackRecipe
 
 
-class BlackboxWordLevelAttack(AttackRecipe):
+class WhiteboxWordLevelAttack(AttackRecipe):
     """
     The blackbox word level attack is an extension on the following study:
     BAE: BERT-based Adversarial Examples for Text Classification.
@@ -38,7 +38,7 @@ class BlackboxWordLevelAttack(AttackRecipe):
     """
 
     @staticmethod
-    def build(model_wrapper):
+    def build(model_wrapper, model_name):
         # "In this paper, we present a simple yet novel technique: BAE (BERT-based
         # Adversarial Examples), which uses a language model (LM) for token
         # replacement to best fit the overall context. We perturb an input sentence
@@ -125,8 +125,8 @@ class BlackboxWordLevelAttack(AttackRecipe):
         # • "If no token causes misclassification, we choose the perturbation that
         # decreases the prediction probability P(C(Sadv)=y) the most."
         #
-        search_method = GreedyWordSwapWIR(wir_method="delete")
+        search_method = GreedyWordSwapWIR(wir_method="attention", model_name=model_name)
 
-        return BlackboxWordLevelAttack(
+        return WhiteboxWordLevelAttack(
             goal_function, constraints, transformation, search_method
         )
