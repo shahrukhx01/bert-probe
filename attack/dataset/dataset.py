@@ -10,7 +10,7 @@ class GermanDataset:
         self.do_sampling = do_sampling
 
     def load_dataset(self):
-        data = pd.read_csv(filepath=self.filepath)
+        data = pd.read_csv(self.filepath)
         dataset = []
 
         for _, row in data.iterrows():

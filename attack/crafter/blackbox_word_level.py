@@ -8,9 +8,9 @@ from textattack.constraints.pre_transformation import (
     RepeatModification,
     StopwordModification,
 )
-from ..utils.universal_sentence_encoder_de import UniversalSentenceEncoderDE
+from utils.universal_sentence_encoder_de import UniversalSentenceEncoderDE
 from textattack.goal_functions import UntargetedClassification
-from ..utils.greedy_word_swap_wir import GreedyWordSwapWIR
+from utils.greedy_word_swap_wir import GreedyWordSwapWIR
 from textattack.transformations import WordSwapMaskedLM
 
 from textattack.attack_recipes.attack_recipe import AttackRecipe
