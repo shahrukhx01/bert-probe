@@ -19,11 +19,10 @@ def main():
     ## define and build attacks
     blackbox_wordlevel_attack = BlackboxWordLevelAttack.build(hasoc_model_wrapper)
     blackbox_charlevel_attack = BlackboxCharacterLevel.build(hasoc_model_wrapper)
-    ## define executor and execute the attack
-    executor = ExecuteAttack()
-    executor.execute(
-        hasoc_dataset, attacks=[blackbox_wordlevel_attack, blackbox_charlevel_attack]
-    )
+    attacks = [blackbox_charlevel_attack, blackbox_wordlevel_attack]
+    ## execute the attack
+    for attack in attacks:
+        ExecuteAttack.execute(hasoc_dataset, attacks=[attack])
 
 
 if __name__ == "__main__":
