@@ -4,9 +4,7 @@ universal sentence encoder class for German language
 """
 
 from textattack.constraints.semantics.sentence_encoders import SentenceEncoder
-from textattack.shared.utils import LazyLoader
-
-hub = LazyLoader("tensorflow_hub", globals(), "tensorflow_hub")
+import tensorflow_hub as hub
 
 
 class UniversalSentenceEncoderDE(SentenceEncoder):
@@ -17,11 +15,9 @@ class UniversalSentenceEncoderDE(SentenceEncoder):
     def __init__(self, threshold=0.8, large=False, metric="angular", **kwargs):
         super().__init__(threshold=threshold, metric=metric, **kwargs)
 
-        tfhub_url = "https://tfhub.dev/google/universal-sentence-encoder-cmlm/multilingual-preprocess/2"
-
-        self._tfhub_url = tfhub_url
-        # Lazily load the model
-        self.model = None
+        self.model = hub.load(
+            "https://tfhub.dev/google/universal-sentence-encoder-multilingual/3"
+        )
 
     def encode(self, sentences):
         if not self.model:
