@@ -1,5 +1,5 @@
 """
-Blackbox Word Level Attack using MLMSwap
+Whitebox Baseline Word Level Attack using MLMSwap
 ============================================
 
 """

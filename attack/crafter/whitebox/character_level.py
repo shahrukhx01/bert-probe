@@ -1,5 +1,5 @@
 """
-Pruthi2019: Combating with Robust Word Recognition
+Whitebox Character Level Attack attention scores
 =================================================================
 
 """
@@ -24,8 +24,9 @@ from textattack.attack_recipes.attack_recipe import AttackRecipe
 
 
 class WhiteboxCharacterLevel(AttackRecipe):
-    """An implementation of the attack used in "Combating Adversarial
-    Misspellings with Robust Word Recognition", Pruthi et al., 2019.
+    """An extension of the attack used in "Combating Adversarial
+    Misspellings with Robust Word Recognition", Pruthi et al., 2019. Where we compute word importances using attentions
+    scores for character level perturbations
 
     This attack focuses on a small number of character-level changes that simulate common typos. It combines:
         - Swapping neighboring characters

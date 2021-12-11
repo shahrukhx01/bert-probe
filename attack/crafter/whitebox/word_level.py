@@ -1,5 +1,5 @@
 """
-Blackbox Word Level Attack using MLMSwap
+Whitebox Word Level Attack using MLMSwap and attention scores
 ============================================
 
 """
@@ -18,8 +18,9 @@ from textattack.attack_recipes.attack_recipe import AttackRecipe
 
 class WhiteboxWordLevelAttack(AttackRecipe):
     """
-    The blackbox word level attack is an extension on the following study:
-    BAE: BERT-based Adversarial Examples for Text Classification.
+    The whitebox version of originally blackbox word level attack is an extension on the following study:
+    BAE: BERT-based Adversarial Examples for Text Classification. Where we compute word importances using attentions
+    scores for word level perturbations
 
     https://arxiv.org/pdf/2004.01970
 
