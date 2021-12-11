@@ -28,22 +28,20 @@ def main():
     ]
     for attack_name, model_name_path, dataset_path in attack_config:
         ## load dataset
-        hasoc_dataset = GermanDataset(filepath=dataset_path).load_dataset()
+        dataset = GermanDataset(filepath=dataset_path).load_dataset()
         ## load model
-        hasoc_model_wrapper = GermanHateSpeechModelWrapper(
-            model_name_path=model_name_path
-        )
+        model_wrapper = GermanHateSpeechModelWrapper(model_name_path=model_name_path)
         ## define and build attacks
-        blackbox_wordlevel_attack = BlackboxWordLevelAttack.build(hasoc_model_wrapper)
-        blackbox_charlevel_attack = BlackboxCharacterLevel.build(hasoc_model_wrapper)
+        blackbox_wordlevel_attack = BlackboxWordLevelAttack.build(model_wrapper)
+        blackbox_charlevel_attack = BlackboxCharacterLevel.build(model_wrapper)
         whitebox_wordlevel_attack = WhiteboxWordLevelAttack.build(
-            model_wrapper=hasoc_model_wrapper, model_name=model_name_path
+            model_wrapper=model_wrapper, model_name=model_name_path
         )
         whitebox_charlevel_attack = WhiteboxCharacterLevel.build(
-            model_wrapper=hasoc_model_wrapper, model_name=model_name_path
+            model_wrapper=model_wrapper, model_name=model_name_path
         )
         baseline_whitebox_wordlevel_attack = BaselineWhiteboxWordLevelAttack.build(
-            model_wrapper=hasoc_model_wrapper, model_name=model_name_path
+            model_wrapper=model_wrapper, model_name=model_name_path
         )
 
         attacks = [
@@ -70,7 +68,7 @@ def main():
         ]
 
         ## execute the attack
-        ExecuteAttack.execute(hasoc_dataset, attacks=attacks)
+        ExecuteAttack.execute(dataset, attacks=attacks)
 
 
 if __name__ == "__main__":
