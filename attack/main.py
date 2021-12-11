@@ -17,18 +17,19 @@ def main():
     attack_config = [
         (
             "hasoc",
-            "/Users/shahrukh/Desktop/victim_models/hasoc_model",
-            "/Users/shahrukh/Desktop/adversarial-bert-german-attacks-defense/attack/dataset/hasoc_german_test_subset.csv",
+            # "/Users/shahrukh/Desktop/victim_models/hasoc_model",
+            "D:\Repos\gbert_hasoc_model_0_8422_acc\model",
+            "./dataset/hasoc_german_test_subset.csv",
         ),
-        (
-            "germeval",
-            "/Users/shahrukh/Desktop/victim_models/germeval_model",
-            "/Users/shahrukh/Desktop/adversarial-bert-german-attacks-defense/attack/dataset/germ_eval_test_subset.csv",
-        ),
+        # (
+        #     "germeval",
+        #     # "/Users/shahrukh/Desktop/victim_models/germeval_model",
+        #     # "/Users/shahrukh/Desktop/adversarial-bert-german-attacks-defense/attack/dataset/germ_eval_test_subset.csv",
+        # ),
     ]
     for attack_name, model_name_path, dataset_path in attack_config:
         ## load dataset
-        dataset = GermanDataset(filepath=dataset_path).load_dataset()
+        dataset = GermanDataset(filepath=dataset_path).load_dataset() ### sampling = False
         ## load model
         model_wrapper = GermanHateSpeechModelWrapper(model_name_path=model_name_path)
         ## define and build attacks
