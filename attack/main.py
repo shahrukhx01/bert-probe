@@ -12,7 +12,7 @@ from crafter import (
 
 def main():
     """
-    Crafting an attack on HASOC based trained BERT model
+    Crafting an attack on German based trained BERT models for GermEval2021 and HASOC FIRE 2019 datasets
     """
     attack_config = [
         (
