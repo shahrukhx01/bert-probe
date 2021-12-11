@@ -4,6 +4,11 @@ import random
 
 
 class GermanDataset:
+    """
+    Dataset wrapper for wrapping the dataset which will be perturbed during the
+    attacks
+    """
+
     def __init__(self, filepath, do_sampling=True, sample_size=10):
         self.filepath = filepath
         self.sample_size = sample_size

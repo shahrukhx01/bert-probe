@@ -1,6 +1,5 @@
 """
 universal sentence encoder class for German language
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 """
 
 from textattack.constraints.semantics.sentence_encoders import SentenceEncoder
@@ -8,9 +7,11 @@ import tensorflow_hub as hub
 
 
 class UniversalSentenceEncoderDE(SentenceEncoder):
-    """Constraint using similarity between sentence encodings of x and x_adv
+    """
+    Constraint using similarity between sentence encodings of x and x_adv
     where the text embeddings are created using the Universal Sentence
-    Encoder."""
+    Encoder for German language.
+    """
 
     def __init__(self, threshold=0.8, large=False, metric="angular", **kwargs):
         super().__init__(threshold=threshold, metric=metric, **kwargs)

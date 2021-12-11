@@ -1,16 +1,3 @@
-"""
-Greedy Word Swap with Word Importance Ranking
-===================================================
-
-
-When WIR method is set to ``unk``, this is a reimplementation of the search
-method from the paper: Is BERT Really Robust?
-
-A Strong Baseline for Natural Language Attack on Text Classification and
-Entailment by Jin et. al, 2019. See https://arxiv.org/abs/1907.11932 and
-https://github.com/jind11/TextFooler.
-"""
-
 import numpy as np
 import torch
 import operator
@@ -27,7 +14,11 @@ from textattack.shared.validators import (
 
 
 class GreedyWordSwapWIR(SearchMethod):
-    """An attack that greedily chooses from a list of possible perturbations in
+    """
+    We extended the class by adding our attention scores
+    based word importance method for whitebox attacks
+
+    An attack that greedily chooses from a list of possible perturbations in
     order of index, after ranking indices by importance.
 
     Args:
@@ -47,8 +38,10 @@ class GreedyWordSwapWIR(SearchMethod):
             )
 
     def _get_index_order(self, initial_text):
-        """Returns word indices of ``initial_text`` in descending order of
-        importance."""
+        """
+        Returns word indices of ``initial_text`` in descending order of
+        importance.
+        """
         len_text = len(initial_text.words)
 
         if self.wir_method == "unk":
@@ -85,6 +78,16 @@ class GreedyWordSwapWIR(SearchMethod):
         return index_order, search_over
 
     def get_attention_scores(self, text):
+        """
+        Returns token indices based on their importance
+        wrt to their corresponding attention scores
+
+        Args:
+            text ([str]): Text on which token importance is computed using attention
+
+        Returns:
+            [List]: List of token indices in the order of their importance
+        """
         token_scores = []
         token_importance = []
         try:
@@ -160,8 +163,10 @@ class GreedyWordSwapWIR(SearchMethod):
         return cur_result
 
     def check_transformation_compatibility(self, transformation):
-        """Since it ranks words by their importance, GreedyWordSwapWIR is
-        limited to word swap and deletion transformations."""
+        """
+        Since it ranks words by their importance, GreedyWordSwapWIR is
+        limited to word swap and deletion transformations.
+        """
         return transformation_consists_of_word_swaps_and_deletions(transformation)
 
     @property

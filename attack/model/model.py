@@ -8,6 +8,11 @@ from transformers import (
 
 
 class GermanHateSpeechModelWrapper(ModelWrapper):
+    """
+    Model wrapper for transformers BERT model for intregration with TextAttack
+    for executing attacks on models
+    """
+
     def __init__(self, model_name_path):
         self.load_model(model_name_path)
 
