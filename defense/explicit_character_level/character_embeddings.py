@@ -47,7 +47,7 @@ class CharacterEmbeddings:
             input_mask_expanded.sum(1), min=1e-9
         )
 
-    def get_embedding(self, word):
+    def get_word_embedding(self, word):
         spaced_word = " ".join(list(word))
         # Tokenize sentences
         encoded_input = self.tokenizer(
@@ -59,3 +59,11 @@ class CharacterEmbeddings:
 
         # Perform pooling. In this case, max pooling.
         return self.mean_pooling(model_output, encoded_input["attention_mask"])
+
+    def get_sequence_embeddings(self, sequence):
+        embeddings_list = []
+        for token in sequence.split(" "):
+            embeddings_list.append(self.get_word_embedding(token))
+        embeddings = torch.Tensor(len(embeddings_list), 768)
+        torch.cat(embeddings_list, out=embeddings)
+        return embeddings
