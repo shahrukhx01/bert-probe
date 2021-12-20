@@ -52,9 +52,7 @@ def main():
         successful, failed = 0, 0
         result_name = f"{filename}_defense".replace(".csv", "")
         dataset = pd.read_csv(f"{basepath}/{filename}")
-        dataset = dataset[
-            dataset["result_type"] == "Successful"
-        ].head()  ## TODO: Revert head()
+        dataset = dataset[dataset["result_type"] == "Successful"]
         model = models["hasoc"]
         embedding = embeddings["hasoc"]
         if "germeval" in result_name:
