@@ -31,17 +31,11 @@ def main():
     embeddings = {
         "hasoc": (
             pd.read_csv("./embeddings/hasoc_vocab_embeddings.csv"),
-            np.load(
-                "/Users/shahrukh/Desktop/adversarial-bert-german-attacks-defense/defense/explicit_character_level/embeddings/hasoc_embeddings.npy"
-            ),
+            np.load("./embeddings/hasoc_embeddings.npy"),
         ),
         "germeval": (
-            pd.read_csv(
-                "/Users/shahrukh/Desktop/adversarial-bert-german-attacks-defense/defense/explicit_character_level/embeddings/germeval_vocab_embeddings.csv"
-            ),
-            np.load(
-                "/Users/shahrukh/Desktop/adversarial-bert-german-attacks-defense/defense/explicit_character_level/embeddings/germeval_embeddings.npy"
-            ),
+            pd.read_csv("./embeddings/germeval_vocab_embeddings.csv"),
+            np.load("./embeddings/germeval_embeddings.npy"),
         ),
     }
     for filename in os.listdir(f"{basepath}/perturbed_sets"):
