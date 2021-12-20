@@ -26,7 +26,10 @@ def main():
             "/Users/shahrukh/Desktop/victim_models/germeval_model"
         ),
     }
-    for filename in os.listdir(basepath)[:1]:  ## TODO: Revert subscript [:1]
+    for filename in os.listdir(basepath):
+        if "defense" in filename:
+            continue
+        successful, failed = 0, 0
         result_name = f"{filename}_defense".replace(".csv", "")
         dataset = pd.read_csv(f"{basepath}/{filename}")
         dataset = dataset[
@@ -54,14 +57,17 @@ def main():
                     perturbed_embeddings[index, :], ground_truth_embeddings
                 ).argmax()
                 perturbed_update[index] = original_tokens[best_candidate_idx]
-                """print(
-                    f"original word: {original_tokens[index]} perturbed word: {perturbed_tokens[index]} updated: {perturbed_update}"
-                )"""
             defended_sequence = " ".join(perturbed_update)
             gt = int(row["ground_truth_output"])
             label = f"LABEL_{gt}"
             prediction = model([defended_sequence])[0]["label"]
-            print(prediction, label)
+            if prediction == label:
+                successful += 1
+            else:
+                failed += 1
+        pd.DataFrame([{"Successful ": successful, "Failed ": failed}]).to_csv(
+            f"{basepath}/{result_name}.csv", index=False
+        )
 
 
 if __name__ == "__main__":
