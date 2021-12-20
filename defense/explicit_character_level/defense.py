@@ -19,7 +19,7 @@ def remove_tags(sequence):
 
 def main():
     char_embedder = CharacterEmbeddings()
-    basepath = "/Users/shahrukh/Desktop/adversarial-bert-german-attacks-defense/defense/datasets"
+    basepath = "./datasets"
     models = {
         "hasoc": GermanHateSpeechModel(
             "/Users/shahrukh/Desktop/victim_models/hasoc_model"
@@ -30,9 +30,7 @@ def main():
     }
     embeddings = {
         "hasoc": (
-            pd.read_csv(
-                "/Users/shahrukh/Desktop/adversarial-bert-german-attacks-defense/defense/explicit_character_level/embeddings/hasoc_vocab_embeddings.csv"
-            ),
+            pd.read_csv("./embeddings/hasoc_vocab_embeddings.csv"),
             np.load(
                 "/Users/shahrukh/Desktop/adversarial-bert-german-attacks-defense/defense/explicit_character_level/embeddings/hasoc_embeddings.npy"
             ),
@@ -46,9 +44,10 @@ def main():
             ),
         ),
     }
-    for filename in os.listdir(basepath):
+    for filename in os.listdir(f"{basepath}/perturbed_sets"):
         if "defense" in filename:
             continue
+        print(filename)
         successful, failed = 0, 0
         result_name = f"{filename}_defense".replace(".csv", "")
         dataset = pd.read_csv(f"{basepath}/{filename}")
