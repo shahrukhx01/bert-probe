@@ -41,10 +41,9 @@ def main():
     for filename in os.listdir(f"{basepath}/perturbed_sets"):
         if "defense" in filename:
             continue
-        print(filename)
         successful, failed = 0, 0
         result_name = f"{filename}_defense".replace(".csv", "")
-        dataset = pd.read_csv(f"{basepath}/{filename}")
+        dataset = pd.read_csv(f"{basepath}/perturbed_sets/{filename}")
         dataset = dataset[dataset["result_type"] == "Successful"]
         model = models["hasoc"]
         embedding = embeddings["hasoc"]
