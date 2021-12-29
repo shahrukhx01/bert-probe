@@ -1,12 +1,19 @@
 from torch.utils.data import TensorDataset, DataLoader, RandomSampler, SequentialSampler
+
 from data import GermanData
 
 
 class GermanDataLoader:
     def __init__(
-        self, data_paths, model_name, do_cleansing, max_sequence_length, batch_size=8
+        self,
+        data_paths,
+        model_name,
+        do_cleansing,
+        max_sequence_length,
+        batch_size=8,
+        dataset_cls=GermanData,
     ):
-        self.german_data = GermanData(
+        self.german_data = dataset_cls(
             data_paths,
             model_name,
             max_sequence_length=max_sequence_length,
