@@ -1,5 +1,5 @@
-from character_embeddings import CharacterEmbeddings
-from model import GermanHateSpeechModel
+from .character_embeddings import CharacterEmbeddings
+from .model import GermanHateSpeechModel
 import pandas as pd
 import os
 from tqdm import tqdm
