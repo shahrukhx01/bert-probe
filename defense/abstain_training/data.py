@@ -33,6 +33,7 @@ class GermanAdversarialData(GermanData):
         # select only successful adv examples
         df = self.adv_train_df
         text = df.perturbed_text[df.result_type == "Successful"]
+        text = text.apply(remove_tags)  # remove inserted tags
         label = [ABSTAIN] * len(text)
 
         # put into other
@@ -44,9 +45,3 @@ class GermanAdversarialData(GermanData):
 
         # clear memory
         del self.adv_train_df
-
-    def clean_text(self, text: str) -> str:
-        # remove html tags inserted by attack
-        text = remove_tags(text)
-        text = super().clean_text(text)
-        return text
