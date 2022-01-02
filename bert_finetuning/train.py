@@ -1,4 +1,4 @@
-from utils import flat_accuracy
+from .utils import flat_accuracy
 from tqdm import tqdm, trange
 from transformers import BertTokenizer, BertConfig
 import torch
