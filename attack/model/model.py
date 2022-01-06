@@ -25,7 +25,7 @@ class GermanHateSpeechModelWrapper(ModelWrapper):
         self.model = TextClassificationPipeline(model=model, tokenizer=tokenizer)
 
     def __call__(self, text_input_list):
-        model_predictions = self.model(text_input_list)
+        model_predictions = self.model(text_input_list, pad_to_max_length=True, truncation=True)
         predictions = []
         for prediction in model_predictions:
             score = prediction["score"]
