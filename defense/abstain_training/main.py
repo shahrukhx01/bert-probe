@@ -73,7 +73,7 @@ def main(args):
     assert hasattr(args, "root_directory")  # can be None
     assert args.dataset is not None
     assert args.model is not None
-    assert args.epoch is not None
+    assert args.epochs is not None
     assert args.batch_size is not None
     assert args.no_cuda is not None
     assert args.model_output_directory is not None
