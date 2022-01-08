@@ -35,8 +35,10 @@ def set_parser_arguments(parser):
 
     parser.add_argument(
         "--model",
-        required=True,
-        help="The path to the model. The model is loaded via `transformers.AutoModelForSequenceClassification`.",
+        default="deepset/gbert-base",
+        help="The path to the model. "
+             "The model is loaded via `transformers.AutoModelForSequenceClassification`. "
+             "By default 'deepset/gbert-base'",
     )
 
     parser.add_argument(
