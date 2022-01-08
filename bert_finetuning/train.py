@@ -13,6 +13,7 @@ def train_model(
     epochs,
     device,
     model_name,
+    save_model_as="./model"
 ):
     t = []
 
@@ -96,7 +97,7 @@ def train_model(
         if val_acc > best_validation_score:
             best_validation_score = val_acc
             print("Saving best model so far...")
-            tokenizer.save_pretrained("./model")
-            model.save_pretrained("./model")
+            tokenizer.save_pretrained(save_model_as)
+            model.save_pretrained(save_model_as)
 
-    return model.from_pretrained("./model").to(device)
+    return model.from_pretrained(save_model_as).to(device)

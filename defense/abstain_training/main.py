@@ -60,8 +60,22 @@ def set_parser_arguments(parser):
         help="Whether to not use CUDA (e.g. for debugging). By default tries to use CUDA.",
     )
 
+    parser.add_argument(
+        "--model-output-directory",
+        default="./model",
+        help="Where to store model checkpoints. Defaults to './model'"
+    )
+
 
 def main(args):
+    assert hasattr(args, "root_path")  # can be None
+    assert args.dataset is not None
+    assert args.model is not None
+    assert args.epoch is not None
+    assert args.batch_size is not None
+    assert args.no_cuda is not None
+    assert args.model_output_directory is not None
+
     epochs = args.epochs
     logger.info("Initiated training for %d epochs!", epochs)
 
@@ -114,6 +128,7 @@ def main(args):
         epochs=epochs,
         device=device,
         model_name=model_name,
+        save_model_as=args.model_output_directory,
     )
 
     logger.info("Training finished! Evaluating model on test set...")
