@@ -1,5 +1,5 @@
 import torch
-from utils import flat_accuracy
+from bert_finetuning.utils import flat_accuracy
 
 
 def eval_model(model, test_dataloader, device):

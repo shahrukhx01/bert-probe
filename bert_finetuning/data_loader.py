@@ -1,6 +1,6 @@
 from torch.utils.data import TensorDataset, DataLoader, RandomSampler, SequentialSampler
 
-from data import GermanData
+from bert_finetuning.data import GermanData
 
 
 class GermanDataLoader:

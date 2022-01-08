@@ -1,3 +1,9 @@
+if __name__ == '__main__':
+    import os
+    import sys
+
+    sys.path.insert(0, os.path.abspath(os.path.join(os.path.dirname(__file__), '../..')))
+
 import argparse
 import logging
 
@@ -8,8 +14,8 @@ from bert_finetuning.config import BertOptimConfig
 from bert_finetuning.data_loader import GermanDataLoader
 from bert_finetuning.eval import eval_model_classification_report
 from bert_finetuning.train import train_model
-from .config import DataPaths
-from .data import GermanAdversarialData
+from defense.abstain_training.config import DataPaths
+from defense.abstain_training.data import GermanAdversarialData
 
 logger = logging.getLogger(__name__)
 
