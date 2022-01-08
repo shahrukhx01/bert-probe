@@ -59,8 +59,8 @@ class GermanAdversarialData(GermanData):
         # put into other
         self.adv_train_df = pd.DataFrame({"text": train_text, "label": train_label})
         self.adv_test_df = pd.DataFrame({"text": test_text, "label": test_label})
-        self.train_df.append(self.adv_train_df, ignore_index=True)
-        self.test_df.append(self.adv_test_df, ignore_index=True)
+        self.train_df = self.train_df.append(self.adv_train_df, ignore_index=True)
+        self.test_df = self.test_df.append(self.adv_test_df, ignore_index=True)
 
         # NOTE: No need to shuffle train_df since a RandomSampler is used to
         # sample from the training data.
