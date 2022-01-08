@@ -21,9 +21,13 @@ class GermanAdversarialData(GermanData):
         super().__init__(
             data_path, model_name, separator, max_sequence_length, do_cleansing
         )
+
+        logger.info("Read in normal dataset. Proceeding to adversarial examples...")
+
         self.adv_train_df = pd.read_csv(data_path["adversarial"]["train"], sep=separator)
         self.adv_test_df = pd.read_csv(data_path["adversarial"]["test"], sep=separator)
 
+        logger.info("Read in adversarial examples. Now merging normal examples with adversarial ones...")
 
         # merge with normal ones
         self.merge_adv_dfs()
@@ -31,6 +35,7 @@ class GermanAdversarialData(GermanData):
     def merge_adv_dfs(self) -> None:
         # calc abstain label
         ABSTAIN = len(pd.Categorical(self.train_df.label).categories)
+        logger.debug("Using `%d` as abstain label.", ABSTAIN)
 
         # select only successful adv examples
         train_text = self.adv_train_df.perturbed_text[self.adv_train_df.result_type == "Successful"]
@@ -52,3 +57,5 @@ class GermanAdversarialData(GermanData):
         # clear memory
         del self.adv_train_df
         del self.adv_test_df
+
+        logger.info("Merging complete.")
