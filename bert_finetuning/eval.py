@@ -1,5 +1,5 @@
 import torch
-from .utils import flat_accuracy
+from utils import flat_accuracy
 
 
 def eval_model(model, test_dataloader, device):
