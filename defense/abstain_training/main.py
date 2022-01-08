@@ -94,8 +94,10 @@ def main(args):
     data_path = DataPaths(root_path=args.root_directory)
     if args.dataset == "hasoc":
         data_path = data_path.HASOC
+        num_labels = 3
     elif args.dataset == "germeval":
         data_path = data_path.GERMEVAL
+        num_labels = 3
     else:
         raise NotImplementedError("Unknown dataset!")
 
@@ -112,7 +114,10 @@ def main(args):
     logger.info("Done loading datasets.")
 
     # load model and optimizers etc.
-    model = AutoModelForSequenceClassification.from_pretrained(model_name)
+    model = AutoModelForSequenceClassification.from_pretrained(
+        model_name,
+        num_labels=num_labels,
+    )
     model = model.to(device)
     logger.info("Loaded model.")
     optim_config = BertOptimConfig(
