@@ -32,16 +32,16 @@ class GermanAdversarialData(GermanData):
         self.adv_test_df = pd.read_csv(data_path["adversarial"]["test"], sep=separator)
 
         logger.info("Read in adversarial examples. Now merging normal examples with adversarial ones...")
-        logger.debug(f"{self.adv_train_df.shape=}")
-        logger.debug(f"{self.adv_test_df.shape=}")
+        logger.debug(f"self.adv_train_df.shape={self.adv_train_df.shape}")
+        logger.debug(f"self.adv_test_df.shape={self.adv_test_df.shape}")
 
         # merge with normal ones
         self.merge_adv_dfs()
 
         logger.info("Merging complete.")
-        logger.debug(f"{self.train_df.shape=}")
-        logger.debug(f"{self.dev_df.shape=}")
-        logger.debug(f"{self.test_df.shape=}")
+        logger.debug(f"self.train_df.shape={self.train_df.shape}")
+        logger.debug(f"self.dev_df.shape={self.dev_df.shape}")
+        logger.debug(f"self.test_df.shape={self.test_df.shape}")
 
     def merge_adv_dfs(self) -> None:
         # calc abstain label
