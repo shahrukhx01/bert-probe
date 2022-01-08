@@ -70,7 +70,7 @@ def set_parser_arguments(parser):
 
 
 def main(args):
-    assert hasattr(args, "root_path")  # can be None
+    assert hasattr(args, "root_directory")  # can be None
     assert args.dataset is not None
     assert args.model is not None
     assert args.epoch is not None
