@@ -1,25 +1,83 @@
+import argparse
+import logging
+
 import torch.cuda
+from transformers import AutoModelForSequenceClassification
 
 from bert_finetuning.config import BertOptimConfig
 from bert_finetuning.data_loader import GermanDataLoader
 from bert_finetuning.eval import eval_model_classification_report
-from bert_finetuning.model import BERTClassifier
 from bert_finetuning.train import train_model
-from .data import GermanAdversarialData
 from .config import DataPaths
+from .data import GermanAdversarialData
+
+logger = logging.getLogger(__name__)
 
 
-def main(root_path=None):
-    epochs = 10
-    num_labels = 3
+def set_parser_arguments(parser):
+    parser.add_argument(
+        "--root-directory",
+        help="The root directory of the datasets. Default: CWD",
+    )
 
-    device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
+    parser.add_argument(
+        "--dataset",
+        choices=("hasoc", "germeval"),
+        required=True,
+        help="The dataset to use.",
+    )
 
-    # TODO: maybe use a cli for setting these settings?
-    data_path = DataPaths(root_path=root_path)
-    data_path = data_path.HASOC
+    parser.add_argument(
+        "--model",
+        required=True,
+        help="The path to the model. The model is loaded via `transformers.AutoModelForSequenceClassification`.",
+    )
 
-    model_name = "deepset/gbert-base"
+    parser.add_argument(
+        "--epochs",
+        default=10,
+        type=int,
+        help="The number of epochs to train for. Default: 10",
+    )
+
+    parser.add_argument(
+        "--batch-size",
+        default=8,
+        type=int,
+        help="The batch-size to use. Default: 8",
+    )
+
+    parser.add_argument(
+        "--no-cuda",
+        action="store_true",
+        default=False,
+        help="Whether to not use CUDA (e.g. for debugging). By default tries to use CUDA.",
+    )
+
+
+def main(args):
+    epochs = args.epochs
+    logger.info("Initiated training for %d epochs!", epochs)
+
+    if args.no_cuda:
+        device = torch.device("cpu")
+    else:
+        if torch.cuda.is_available():
+            device = torch.device("cuda")
+        else:
+            device = torch.device("cpu")
+            logger.warning("CUDA specified but not available. Switching to CPU...")
+
+    data_path = DataPaths(root_path=args.root_directory)
+    if args.dataset == "hasoc":
+        data_path = data_path.HASOC
+    elif args.dataset == "germeval":
+        data_path = data_path.GERMEVAL
+    else:
+        raise NotImplementedError("Unknown dataset!")
+
+    model_name = args.model
+    logger.info("Loading datasets.")
     data_loaders = GermanDataLoader(
         data_path,
         model_name,
@@ -28,13 +86,19 @@ def main(root_path=None):
         batch_size=8,
         dataset_cls=GermanAdversarialData,
     )
-    model = BERTClassifier(num_labels=num_labels).get_model()
+    logger.info("Done loading datasets.")
+
+    # load model and optimizers etc.
+    model = AutoModelForSequenceClassification.from_pretrained(model_name)
     model = model.to(device)
+    logger.info("Loaded model.")
     optim_config = BertOptimConfig(
         model=model, train_dataloader=data_loaders.train_dataloader, epochs=epochs
     )
+    logger.info("Loaded optimizer.")
 
     # execute the training routine
+    logger.info("Starting training...")
     model = train_model(
         model=model,
         optimizer=optim_config.optimizer,
@@ -46,13 +110,19 @@ def main(root_path=None):
         model_name=model_name,
     )
 
-    # test model performance on unseen test set
+    logger.info("Training finished! Evaluating model on test set...")
     eval_model_classification_report(
         model=model,
         test_dataloader=data_loaders.test_dataloader,
         device=device,
     )
 
+    logger.info("Finished!")
+
 
 if __name__ == "__main__":
-    main()
+    parser = argparse.ArgumentParser()
+    set_parser_arguments(parser)
+    args = parser.parse_args()
+
+    main(args)
