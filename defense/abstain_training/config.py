@@ -14,7 +14,7 @@ class DataPaths:
 
         "adversarial": {
             "train": "defense/abstain_training/datasets/results-hasoc_whitebox_charlevel_attack_train.csv",
-            "test": "datasets/perturbed_sets/results-hasoc_whitebox_charlevel_attack.csv",
+            "test": "defense/explicit_character_level/datasets/perturbed_sets/results-hasoc_whitebox_charlevel_attack.csv",
         },
     }
 
@@ -24,10 +24,10 @@ class DataPaths:
         "test": "bert_finetuning/datasets/germeval_dataset/germ_eval_test.csv",
 
         "adversarial": {
-            "train": ...,  # TODO
-            "test": ...,
+            "train": "defense/abstain_training/datasets/results-germeval_whitebox_charlevel_attack.csv",
+            "test": "defense/explicit_character_level/datasets/perturbed_sets/results-germeval_whitebox_charlevel_attack.csv",
         },
-    },
+    }
 
     def _add_root_path(self, root_path, to_dict):
         """
