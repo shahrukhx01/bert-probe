@@ -6,6 +6,7 @@ from bert_finetuning.data import GermanData
 from defense.explicit_character_level.defense import remove_tags
 
 logger = logging.getLogger(__name__)
+logger.addHandler(logging.StreamHandler())
 
 
 class GermanAdversarialData(GermanData):
@@ -23,14 +24,24 @@ class GermanAdversarialData(GermanData):
         )
 
         logger.info("Read in normal dataset. Proceeding to adversarial examples...")
+        logger.debug(f"{self.train_df.shape=}")
+        logger.debug(f"{self.dev_df.shape=}")
+        logger.debug(f"{self.test_df.shape=}")
 
         self.adv_train_df = pd.read_csv(data_path["adversarial"]["train"], sep=separator)
         self.adv_test_df = pd.read_csv(data_path["adversarial"]["test"], sep=separator)
 
         logger.info("Read in adversarial examples. Now merging normal examples with adversarial ones...")
+        logger.debug(f"{self.adv_train_df.shape=}")
+        logger.debug(f"{self.adv_test_df.shape=}")
 
         # merge with normal ones
         self.merge_adv_dfs()
+
+        logger.info("Merging complete.")
+        logger.debug(f"{self.train_df.shape=}")
+        logger.debug(f"{self.dev_df.shape=}")
+        logger.debug(f"{self.test_df.shape=}")
 
     def merge_adv_dfs(self) -> None:
         # calc abstain label
@@ -57,5 +68,3 @@ class GermanAdversarialData(GermanData):
         # clear memory
         del self.adv_train_df
         del self.adv_test_df
-
-        logger.info("Merging complete.")

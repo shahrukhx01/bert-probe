@@ -18,6 +18,7 @@ from defense.abstain_training.config import DataPaths
 from defense.abstain_training.data import GermanAdversarialData
 
 logger = logging.getLogger(__name__)
+logger.addHandler(logging.StreamHandler())
 
 
 def set_parser_arguments(parser):
