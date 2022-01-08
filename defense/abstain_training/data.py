@@ -24,9 +24,9 @@ class GermanAdversarialData(GermanData):
         )
 
         logger.info("Read in normal dataset. Proceeding to adversarial examples...")
-        logger.debug(f"{self.train_df.shape=}")
-        logger.debug(f"{self.dev_df.shape=}")
-        logger.debug(f"{self.test_df.shape=}")
+        logger.debug(f"self.train_df.shape={self.train_df.shape}")
+        logger.debug(f"self.dev_df.shape={self.dev_df.shape}")
+        logger.debug(f"self.test_df.shape={self.test_df.shape}")
 
         self.adv_train_df = pd.read_csv(data_path["adversarial"]["train"], sep=separator)
         self.adv_test_df = pd.read_csv(data_path["adversarial"]["test"], sep=separator)
