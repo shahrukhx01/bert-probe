@@ -2,7 +2,7 @@
 
 **Links to code sections**
 - [BERT Finetunig](https://github.com/shahrukhx01/adversarial-bert-german-attacks-defense/tree/main/bert_finetuning)
-- [Whitebox Baseline, Character-level and Word-level attacks](https://github.com/shahrukhx01/adversarial-bert-german-attacks-defense/tree/main/attack/crafter/whitebox)
+- [Attacks: Whitebox Baseline, Character-level and Word-level](https://github.com/shahrukhx01/adversarial-bert-german-attacks-defense/tree/main/attack/crafter/whitebox)
 - [Defenses](https://github.com/shahrukhx01/adversarial-bert-german-attacks-defense/tree/main/defense)
 
 **Datasets**:
