@@ -3,7 +3,7 @@
 **Links to code sections**
 - [BERT Finetunig](https://github.com/shahrukhx01/adversarial-bert-german-attacks-defense/tree/main/bert_finetuning)
 - [Attacks: Whitebox Baseline, Character-level and Word-level](https://github.com/shahrukhx01/adversarial-bert-german-attacks-defense/tree/main/attack/crafter/whitebox)
-- [Defenses](https://github.com/shahrukhx01/adversarial-bert-german-attacks-defense/tree/main/defense) (For Abstain based defense we re-use bert finetuning code)
+- [Defenses: Explicit Character-level](https://github.com/shahrukhx01/adversarial-bert-german-attacks-defense/tree/main/defense) (For Abstain based defense we re-use bert finetuning code)
 
 **Datasets**:
 - Germeval 2021 Task 1: Toxic Comment Classification
