@@ -3,8 +3,7 @@
 **Links to code sections**
 - [BERT Finetunig](https://github.com/shahrukhx01/adversarial-bert-german-attacks-defense/tree/main/bert_finetuning)
 - [Attacks: Whitebox Baseline, Character-level and Word-level](https://github.com/shahrukhx01/adversarial-bert-german-attacks-defense/tree/main/attack/crafter/whitebox)
-- [Defenses: Explicit Character-level](https://github.com/shahrukhx01/adversarial-bert-german-attacks-defense/tree/main/defense) (For Abstain based defense we re-use bert finetuning code)
-
+- [Defenses: Explicit Character-level](https://github.com/shahrukhx01/adversarial-bert-german-attacks-defense/tree/main/defense) 
 **Datasets**:
 - Germeval 2021 Task 1: Toxic Comment Classification
 - HASOC (2019) German Language: Sub Task 1, Hate Speech Classification
