@@ -6,6 +6,7 @@ import torch
 class BERTClassifier:
     def __init__(self, num_labels=2):
         self.configuration = BertConfig()
+        self.num_labels = num_labels
 
     def get_model(self):
         """
@@ -15,7 +16,7 @@ class BERTClassifier:
         model = BertModel(self.configuration)
 
         model = BertForSequenceClassification.from_pretrained(
-            "deepset/gbert-base", num_labels=2
+            "deepset/gbert-base", num_labels=self.num_labels
         )
         device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
         model.to(device)
