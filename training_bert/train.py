@@ -1,6 +1,6 @@
 from .utils import flat_accuracy
-from tqdm import tqdm, trange
-from transformers import BertTokenizer, BertConfig
+from tqdm import trange
+from transformers import BertTokenizer
 import torch
 
 
@@ -13,7 +13,7 @@ def train_model(
     epochs,
     device,
     model_name,
-    save_model_as="./model"
+    save_model_as="./model",
 ):
     t = []
 

@@ -1,11 +1,5 @@
-if __name__ == '__main__':
-    import os
-    import sys
-
-    sys.path.insert(0, os.path.abspath(os.path.join(os.path.dirname(__file__), '../..')))
-
-from defense.explicit_character_level.character_embeddings import CharacterEmbeddings
-from defense.explicit_character_level.model import GermanHateSpeechModel
+from defenses.explicit_character_level.character_embeddings import CharacterEmbeddings
+from defenses.explicit_character_level.model import GermanHateSpeechModel
 import pandas as pd
 import os
 from tqdm import tqdm

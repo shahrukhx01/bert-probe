@@ -1,15 +1,9 @@
-if __name__ == '__main__':
-    import os
-    import sys
-
-    sys.path.insert(0, os.path.abspath(os.path.join(os.path.dirname(__file__), '..')))
-
 import torch
-from bert_finetuning.data_loader import GermanDataLoader
-from bert_finetuning.model import BERTClassifier
-from bert_finetuning.config import BertOptimConfig
-from bert_finetuning.train import train_model
-from bert_finetuning.eval import eval_model
+from training_bert.data_loader import GermanDataLoader
+from training_bert.model import BERTClassifier
+from training_bert.config import BertOptimConfig
+from training_bert.train import train_model
+from training_bert.eval import eval_model
 
 if __name__ == "__main__":
     epochs = 10

@@ -2,8 +2,7 @@
 import pandas as pd
 import torch
 from keras.preprocessing.sequence import pad_sequences
-from sklearn.model_selection import train_test_split
-from transformers import BertTokenizer, BertConfig
+from transformers import BertTokenizer
 from tqdm import tqdm
 import logging
 import re

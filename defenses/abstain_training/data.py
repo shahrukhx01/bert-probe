@@ -2,22 +2,21 @@ import logging
 
 import pandas as pd
 
-from bert_finetuning.data import GermanData
-from defense.explicit_character_level.defense import remove_tags
+from training_bert.data import GermanData
+from defenses.explicit_character_level.defense import remove_tags
 
 logger = logging.getLogger(__name__)
 logger.addHandler(logging.StreamHandler())
 
 
 class GermanAdversarialData(GermanData):
-
     def __init__(
-            self,
-            data_path,
-            model_name,
-            separator=",",
-            max_sequence_length=512,
-            do_cleansing=True,
+        self,
+        data_path,
+        model_name,
+        separator=",",
+        max_sequence_length=512,
+        do_cleansing=True,
     ):
         super().__init__(
             data_path, model_name, separator, max_sequence_length, do_cleansing
@@ -28,10 +27,14 @@ class GermanAdversarialData(GermanData):
         logger.debug(f"self.dev_df.shape={self.dev_df.shape}")
         logger.debug(f"self.test_df.shape={self.test_df.shape}")
 
-        self.adv_train_df = pd.read_csv(data_path["adversarial"]["train"], sep=separator)
+        self.adv_train_df = pd.read_csv(
+            data_path["adversarial"]["train"], sep=separator
+        )
         self.adv_test_df = pd.read_csv(data_path["adversarial"]["test"], sep=separator)
 
-        logger.info("Read in adversarial examples. Now merging normal examples with adversarial ones...")
+        logger.info(
+            "Read in adversarial examples. Now merging normal examples with adversarial ones..."
+        )
         logger.debug(f"self.adv_train_df.shape={self.adv_train_df.shape}")
         logger.debug(f"self.adv_test_df.shape={self.adv_test_df.shape}")
 
@@ -49,8 +52,12 @@ class GermanAdversarialData(GermanData):
         logger.debug("Using `%d` as abstain label.", ABSTAIN)
 
         # select only successful adv examples
-        train_text = self.adv_train_df.perturbed_text[self.adv_train_df.result_type == "Successful"]
-        test_text = self.adv_test_df.perturbed_text[self.adv_test_df.result_type == "Successful"]
+        train_text = self.adv_train_df.perturbed_text[
+            self.adv_train_df.result_type == "Successful"
+        ]
+        test_text = self.adv_test_df.perturbed_text[
+            self.adv_test_df.result_type == "Successful"
+        ]
         train_text = train_text.apply(remove_tags)  # remove inserted tags
         test_text = test_text.apply(remove_tags)  # remove inserted tags
         train_label = [ABSTAIN] * len(train_text)
