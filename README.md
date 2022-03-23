@@ -1,4 +1,5 @@
-# White-Box Attacks on BERT in the German Language with Explicit and Implicit Character Level Defense
+# BERT Probe
+A python package for probing attention based robustness to character and word based adversarial evaluation. Also, with recipes of implicit and explicit defenses against character-level attacks.
 
 **Links to code sections**
 - [BERT Finetunig](https://github.com/shahrukhx01/adversarial-bert-german-attacks-defense/tree/main/bert_finetuning)
@@ -7,3 +8,22 @@
 **Datasets**:
 - Germeval 2021 Task 1: Toxic Comment Classification
 - HASOC (2019) German Language: Sub Task 1, Hate Speech Classification
+
+
+## Citing & Authors
+
+If you find this repository helpful, feel free to cite our publication:
+
+
+```bibtex
+@inproceedings{bertprobe,
+  author    = {Shahrukh Khan and
+               Mahnoor Shahid and
+               Navdeeppal Singh},
+  title     = {White-Box Attacks on Hate-speech BERT Classifiers in German with Explicit and Implicit Character Level Defense},
+  booktitle = {BOHR International Journal of Intelligent Instrumentation and Computing, 2022},
+  publisher = {BOHR Publishers},
+  year      = {2022},
+  url       = {https://bohrpub.com/journals/BIJIIAC/Vol1N1/BIJIIAC_20221104.html}
+}
+```
