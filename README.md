@@ -12,7 +12,7 @@ A python package for probing attention based robustness to character and word ba
 
 ## Citing & Authors
 
-If you find this repository helpful, feel free to cite our publication [Hindi/Bengali Sentiment Analysis Using Transfer Learning and Joint Dual Input Learning with Self Attention](https://arxiv.org/abs/2202.05457):
+If you find this repository helpful, feel free to cite our publication:
 
 
 ```bibtex
