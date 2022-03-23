@@ -32,4 +32,4 @@ class ExecuteAttack:
             # write the results and attack summary to csv
             logger.flush()
             summary = logger.df["result_type"].value_counts()
-            summary.to_csv(f"./attack_logs/summary-{attack_name}.csv")
+            summary.to_csv(f"{logs_path}/summary-{attack_name}.csv")
