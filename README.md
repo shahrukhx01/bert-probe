@@ -1,4 +1,5 @@
-# White-Box Attacks on BERT in the German Language with Explicit and Implicit Character Level Defense
+# BERT Probe
+A python package for probing attention based robustness to character and word based adversarial evaluation. Also, with recipes of implicit and explicit defenses against character-level attacks.
 
 **Links to code sections**
 - [BERT Finetunig](https://github.com/shahrukhx01/adversarial-bert-german-attacks-defense/tree/main/bert_finetuning)
