@@ -5,6 +5,10 @@ Evaluates BERT models on character and word based adversarial attacks. Also, pre
 ```bash
 # install dependencies
 pip install -r requirements.txt
+```
+
+```python
+import stanza
 
 # download stanza german model
 stanza.download('de')
