@@ -19,7 +19,7 @@ def main():
         (
             "hasoc",
             "shahrukhx01/gbert-hasoc-german-2019",
-            "../data/hasoc_german_2019/hasoc_german_probing_set.csv",
+            "data/hasoc_german_2019/hasoc_german_probing_set.csv",
         ),
         # (
         #     "germeval",

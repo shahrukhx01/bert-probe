@@ -15,7 +15,10 @@ class GermanDataset:
         self.do_sampling = do_sampling
 
     def load_dataset(self):
-        data = pd.read_csv(self.filepath)
+        import pathlib
+
+        base_path = pathlib.Path(__file__).parent.parent.parent.resolve()
+        data = pd.read_csv(f"{base_path}/{self.filepath}")
         dataset = []
 
         for _, row in data.iterrows():
