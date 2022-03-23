@@ -1,6 +1,6 @@
 transformers==4.17.0
 torch==1.11.0
-tqdm>=4.27
+tqdm==4.49.0
 sklearn==0.0
 numpy==1.20.3
 pandas==1.2.4
