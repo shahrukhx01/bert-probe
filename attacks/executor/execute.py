@@ -9,7 +9,7 @@ class ExecuteAttack:
     """
 
     @staticmethod
-    def execute(dataset, attacks):
+    def execute(dataset, attacks, logs_path="./attack_logs"):
         """
         Execute the given attacks by perturbing the dataset on
         victim model
@@ -23,7 +23,7 @@ class ExecuteAttack:
         for attack_name, attack in tqdm(attacks):
             logger = CSVLogger(
                 color_method="html",
-                filename=f"./attack_logs/results-{attack_name}.csv",
+                filename=f"{logs_path}/results-{attack_name}.csv",
             )
             for text, label in dataset:
                 result = attack.attack(text, label)

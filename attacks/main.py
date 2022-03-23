@@ -14,17 +14,17 @@ def main():
     """
     Crafting an attack on German based trained BERT models for GermEval2021 and HASOC FIRE 2019 datasets
     """
+    logs_path = "./attack_logs"
     attack_config = [
         (
             "hasoc",
-            "/Users/shahrukh/Desktop/victim_models/hasoc_model",
-            # "D:\Repos\gbert_hasoc_model_0_8422_acc\model",
-            "./dataset/hasoc_german_test_subset.csv",
+            "shahrukhx01/gbert-hasoc-german-2019",
+            "../data/hasoc_german_2019/hasoc_german_probing_set.csv",
         ),
         # (
         #     "germeval",
-        #     # "/Users/shahrukh/Desktop/victim_models/germeval_model",
-        #     # "/Users/shahrukh/Desktop/adversarial-bert-german-attacks-defense/attack/dataset/germ_eval_test_subset.csv",
+        #     # "shahrukhx01/gbert-germeval-2021",
+        #     # "../data/hasoc_german_2019/germeval_probing_set.csv",
         # ),
     ]
     for attack_name, model_name_path, dataset_path in attack_config:
@@ -71,7 +71,7 @@ def main():
         ]
 
         ## execute the attack
-        ExecuteAttack.execute(dataset, attacks=attacks)
+        ExecuteAttack.execute(dataset, attacks=attacks, logs_path=logs_path)
 
 
 if __name__ == "__main__":
