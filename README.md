@@ -1,7 +1,14 @@
 # BERT Probe
 A python package for probing attention based robustness to character and word based adversarial evaluation. Also, with recipes of implicit and explicit defenses against character-level attacks.
 
-**Links to code sections**
+## Usage
+```bash
+# install dependencies
+pip install -r requirements.txt
+
+# download stanza german model
+stanza.download('de')
+```
 - [BERT Finetunig](https://github.com/shahrukhx01/adversarial-bert-german-attacks-defense/tree/main/bert_finetuning)
 
 ```python
