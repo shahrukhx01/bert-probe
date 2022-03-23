@@ -1,5 +1,5 @@
-# BERT Probe
-A python package for probing attention based robustness to character and word based adversarial evaluation. Also, with recipes of implicit and explicit defenses against character-level attacks.
+# BERT Probe: A python package for probing attention based robustness evaluation of BERT models
+Evaluates BERT models on character and word based adversarial attacks. Also, presents recipes of implicit and explicit defenses against character-level attacks.
 
 ## Usage
 ```bash
