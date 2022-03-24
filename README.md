@@ -13,7 +13,7 @@ import stanza
 # download stanza german model
 stanza.download('de')
 ```
-- [BERT Finetunig](https://github.com/shahrukhx01/adversarial-bert-german-attacks-defense/tree/main/bert_finetuning)
+- [BERT Finetunig](https://github.com/shahrukhx01/adversarial-bert-german-attacks-defense/tree/main/training_bert)
 
 ```python
   epochs = 10
