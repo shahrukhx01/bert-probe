@@ -49,7 +49,7 @@ stanza.download('de')
   ## test model performance on unseen test set
   eval_model(model=model, test_dataloader=data_loaders.test_dataloader, device=device)
 ```
-- [Attacks: Whitebox Baseline, Character-level and Word-level](https://github.com/shahrukhx01/adversarial-bert-german-attacks-defense/tree/main/attack/crafter/whitebox)
+- [Attacks: Whitebox Baseline, Character-level and Word-level](https://github.com/shahrukhx01/adversarial-bert-german-attacks-defense/tree/main/attacks/crafter/whitebox)
 ```python
   logs_path = "./attack_logs"
   attack_config = [
@@ -87,7 +87,7 @@ stanza.download('de')
      ## execute the attack
     ExecuteAttack.execute(dataset, attacks=attacks, logs_path=logs_path)
 ```
-- [Defenses: Explicit Character-level and Abstain label training](https://github.com/shahrukhx01/adversarial-bert-german-attacks-defense/tree/main/defense) <br/>
+- [Defenses: Explicit Character-level and Abstain label training](https://github.com/shahrukhx01/adversarial-bert-german-attacks-defenses/tree/main/defense) <br/>
 **Datasets**:
 - Germeval 2021 Task 1: Toxic Comment Classification
 - HASOC (2019) German Language: Sub Task 1, Hate Speech Classification
