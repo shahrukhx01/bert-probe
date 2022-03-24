@@ -13,7 +13,7 @@ import stanza
 # download stanza german model
 stanza.download('de')
 ```
-- [BERT Finetunig](https://github.com/shahrukhx01/adversarial-bert-german-attacks-defense/tree/main/training_bert)
+- [BERT Finetunig](https://github.com/shahrukhx01/bert-probe/tree/main/training_bert)
 
 ```python
   epochs = 10
@@ -49,7 +49,7 @@ stanza.download('de')
   ## test model performance on unseen test set
   eval_model(model=model, test_dataloader=data_loaders.test_dataloader, device=device)
 ```
-- [Attacks: Whitebox Baseline, Character-level and Word-level](https://github.com/shahrukhx01/adversarial-bert-german-attacks-defense/tree/main/attacks/crafter/whitebox)
+- [Attacks: Whitebox Baseline, Character-level and Word-level](https://github.com/shahrukhx01/bert-probe/tree/main/attacks/crafter/whitebox)
 ```python
   logs_path = "./attack_logs"
   attack_config = [
