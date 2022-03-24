@@ -49,7 +49,7 @@ stanza.download('de')
   ## test model performance on unseen test set
   eval_model(model=model, test_dataloader=data_loaders.test_dataloader, device=device)
 ```
-- [Attacks: Whitebox Baseline, Character-level and Word-level](https://github.com/shahrukhx01/bert-probe/tree/main/attacks/crafter/whitebox)
+- [Attacks: Whitebox Baseline, Character-level and Word-level](https://github.com/shahrukhx01/bert-probe/blob/main/attacks/main.py)
 ```python
   logs_path = "./attack_logs"
   attack_config = [
