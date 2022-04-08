@@ -62,7 +62,7 @@ stanza.download('de')
              "germeval",
              "shahrukhx01/gbert-germeval-2021",
              "data/hasoc_german_2019/germeval_probing_set.csv",
-        # ),
+        ),
     ]
   for attack_name, model_name_path, dataset_path in attack_config:
     ## load dataset
